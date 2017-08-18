@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Clock from './components/Clock';
-import Footer from './components/Footer';
+import Layout from './components/Layout';
 
 const hello = "Dynamic Value Expression";
 class App extends Component {
   render() {
+    const title = "Alan Natan";
     return (
       <div className="App">
         <div className="App-header">
@@ -16,8 +17,8 @@ class App extends Component {
         <p className="App-intro">
             Hi {this.props.someName}!
         </p>
-        <Clock />
-        <Footer />
+        {/* <Clock /> */}
+        <Layout />
       </div>
     );
   }
