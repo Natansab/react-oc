@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Clock from './Clock';
+import Clock from './components/Clock';
+import Footer from './components/Footer';
 
 const hello = "Dynamic Value Expression";
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
             Hi {this.props.someName}!
         </p>
         <Clock />
+        <Footer />
       </div>
     );
   }
