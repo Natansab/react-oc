@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 export default class Footer extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       name: 'Will',
       date: new Date().toLocaleString(),

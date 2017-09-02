@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-let name="NAT";
+let name='Natan';
 let time = new Date().toLocaleString();
 ReactDOM.render(<App someName={name} time={time}/>, document.getElementById('root'));
 registerServiceWorker();

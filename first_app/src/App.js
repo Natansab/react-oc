@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Clock from './components/Clock';
-import Layout from './components/Layout';
+// import Layout from './components/Layout';
+import MyComponent from './components/MyComponent';
+import ColoredBlock from './components/ColoredBlock';
+
 
 const hello = "Dynamic Value Expression";
 class App extends Component {
@@ -17,8 +20,12 @@ class App extends Component {
         <p className="App-intro">
             Hi {this.props.someName}!
         </p>
-        {/* <Clock /> */}
-        <Layout />
+        <Clock name='hello'/>
+        {/* <Layout /> */}
+        <MyComponent click="Click"/>
+        <ColoredBlock />
+
+
       </div>
     );
   }
