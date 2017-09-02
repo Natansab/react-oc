@@ -17,14 +17,50 @@ class Products extends React.Component {
     super(props);
     this.state = {
       inStockOnly: false,
+      filterText: '',
       products: PRODUCTS
     };
+    this.changeFilterStatus = this.changeFilterStatus.bind(this);
   }
+
+//   changeFilterStatus() {
+//   //   this.setState((prevState) => {
+//   //     this.state.inStockOnly = prevState.inStockOnly ? false : true;
+//   // });
+//   console.log(this.state);
+//   let newStockStatus = this.state.inStockOnly ? false : true;
+//   this.setState({inStockOnly: newStockStatus});
+//   console.log(this.state.inStockOnly);
+// }
+
+changeSearchText(event) {
+  this.setState({filterText: event.target.value});
+}
+
+changeFilterStatus() {
+  this.setState((prevState) => {
+    let newStockStatus = prevState.inStockOnly ? false : true;
+    return {
+      inStockOnly: newStockStatus,
+    };
+});
+}
+
+
   render() {
     return (
       <div>
-        <Filters inStockOnly={this.state.inStockOnly}/>
-        <ProductTable products={this.state.products} inStockOnly={this.state.inStockOnly}/>
+        <Filters
+          inStockOnly={this.state.inStockOnly}
+          onClick={this.changeFilterStatus}
+          search={this.filterText}
+          handleChange={this.handleChange}
+        />
+        <ProductTable
+          products={this.state.products}
+          inStockOnly={this.state.inStockOnly}
+          search={this.state.filterText}
+        />
         <ProductForm />
       </div>
     );

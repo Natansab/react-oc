@@ -17,9 +17,13 @@ export default class Filters extends Component {
     // Methode plus condensee
     productsArray = Object.keys(this.props.products).map((pId) => this.props.products[pId]);
 
-    let rows = productsArray.map((product) => {
+    let rows = [];
+    productsArray.forEach((product) => {
+      // console.log(this.props);
+      if (product.name.indexOf(this.props.search) === -1 || (this.props.inStockOnly && !product.stocked))
+        return;
       return (
-        <ProductRow product={product} key={product.id}/>
+        rows.push(<ProductRow product={product} key={product.id}/>)
       );
     })
 
