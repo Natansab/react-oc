@@ -13,6 +13,7 @@ export default class ProductForm extends Component {
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.changeInStockStatus = this.changeInStockStatus.bind(this);
   }
 
   handleSubmit(event) {
@@ -22,9 +23,23 @@ export default class ProductForm extends Component {
   }
 
   handleChange(event) {
+    if (event.target.name === 'stocked')
+      return ;
     let updatedProduct = this.state.product;
     updatedProduct[event.target.name] = event.target.value;
     this.setState({ product: updatedProduct});
+  }
+
+  changeInStockStatus() {
+    this.setState((prevState) => {
+      let inStockStatus = prevState.product.stocked ? false : true;
+      console.log(inStockStatus);
+      let updatedProduct = this.state.product;
+      updatedProduct.stocked = inStockStatus;
+      return {
+        product: updatedProduct,
+      };
+    });
   }
 
 
@@ -49,7 +64,7 @@ export default class ProductForm extends Component {
           </label>
           <br/>
           <label>
-            <input type="checkbox" name="stocked" value={this.state.product.stocked}/>
+            <input type="checkbox" name="stocked" value="true" onClick={this.changeInStockStatus}/>
             In Stock?
           </label>
           <br/>
