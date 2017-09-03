@@ -19,7 +19,6 @@ export default class Filters extends Component {
 
     let rows = [];
     productsArray.forEach((product) => {
-      // console.log(this.props);
       if (product.name.indexOf(this.props.search) === -1 || (this.props.inStockOnly && !product.stocked))
         return;
       return (

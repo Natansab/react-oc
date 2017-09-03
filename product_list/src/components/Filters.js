@@ -9,9 +9,10 @@ export default class Filters extends Component {
     this.state = {value: ''};
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-    // this.props.handleChange(event);
+  handleChange(event, props) {
+    this.setState({value: event.target.value.toUpperCase()});
+    console.log(this.props);
+    this.props.onChange(event);
   }
 
   handleClick(props) {
@@ -25,6 +26,8 @@ export default class Filters extends Component {
         <br/>
         <input type="text" placeholder='Search...' value={this.props.filterText} onChange={this.handleChange}/>
         My search is : {this.state.value}
+        <br/>
+        Props.filterText = {this.props.filterText}
         <br/>
         <p>
           <label className='unselectable'>

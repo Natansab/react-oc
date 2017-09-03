@@ -21,6 +21,7 @@ class Products extends React.Component {
       products: PRODUCTS
     };
     this.changeFilterStatus = this.changeFilterStatus.bind(this);
+    this.changeSearchText = this.changeSearchText.bind(this);
   }
 
 //   changeFilterStatus() {
@@ -53,8 +54,9 @@ changeFilterStatus() {
         <Filters
           inStockOnly={this.state.inStockOnly}
           onClick={this.changeFilterStatus}
-          search={this.filterText}
-          handleChange={this.handleChange}
+          filterText={this.state.filterText}
+          // handleChange={this.handleChange}
+          onChange={this.changeSearchText}
         />
         <ProductTable
           products={this.state.products}
