@@ -5,7 +5,7 @@ export default class ProductForm extends Component {
     super(props);
     let newProduct = {
       category: '',
-      price: 0,
+      price: '',
       stocked: false,
       name:'' };
       this.state = {
@@ -35,17 +35,17 @@ export default class ProductForm extends Component {
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <label>
             Name:
-            <input type="text" name="name" value={this.state.product.name}/>
+            <input type="text" name="name" value={this.state.product.name} required/>
           </label>
           <br/>
           <label>
             Category:
-            <input type="text" name="category" value={this.state.product.category}/>
+            <input type="text" name="category" value={this.state.product.category} required/>
           </label>
           <br/>
           <label>
             Price:
-            <input type="text" name="price" value={this.state.product.price}/>
+            <input type="number" name="price" value={this.state.product.price} required/>
           </label>
           <br/>
           <label>
