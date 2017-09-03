@@ -3,10 +3,14 @@ import SortableColumnHeader from './SortableColumnHeader';
 import ProductRow from './ProductRow';
 
 export default class ProductTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { rows: ''};
+  }
   render() {
-    let productsArray = [];
 
-    // Methode plus condensee
+    // Make array from object
+    let productsArray = [];
     productsArray = Object.keys(this.props.products).map((pId) => this.props.products[pId]);
 
     let rows = [];
@@ -16,7 +20,9 @@ export default class ProductTable extends Component {
       return (
         rows.push(<ProductRow product={product} key={product.id} onClick={this.props.onClick}/>)
       );
-    })
+    });
+
+    this.setState({ rows: rows});
 
     return (
       <div>
