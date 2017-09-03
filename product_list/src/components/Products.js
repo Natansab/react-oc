@@ -46,7 +46,7 @@ class Products extends React.Component {
   }
 
   addProduct(category, price, stocked, name) {
-    let id = Object.keys(this.state.products).length + 1;
+    let id = Math.max.apply(null, Object.keys(this.state.products)) + 1;
     let newProduct = {id, category, price, stocked, name};
     let updatedProductList = this.state.products;
     updatedProductList[id] = newProduct;
