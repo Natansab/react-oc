@@ -6,7 +6,7 @@ export default class ProductForm extends Component {
     let newProduct = {
       category: '',
       price: 0,
-      stocked:'',
+      stocked: false,
       name:'' };
       this.state = {
         product: newProduct
@@ -16,6 +16,8 @@ export default class ProductForm extends Component {
   }
 
   handleSubmit(event) {
+    const p = this.state.product;
+    this.props.onSubmit(p.category, p.price, p.stocked, p.name);
     event.preventDefault();
   }
 
@@ -33,21 +35,21 @@ export default class ProductForm extends Component {
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <label>
             Name:
-            <input type="text" name="name" value={this.state.name}/>
+            <input type="text" name="name" value={this.state.product.name}/>
           </label>
           <br/>
           <label>
             Category:
-            <input type="text" name="category" value={this.state.category}/>
+            <input type="text" name="category" value={this.state.product.category}/>
           </label>
           <br/>
           <label>
             Price:
-            <input type="text" name="price" value={this.state.price}/>
+            <input type="text" name="price" value={this.state.product.price}/>
           </label>
           <br/>
           <label>
-            <input type="checkbox" name="stocked" value={this.state.stocked}/>
+            <input type="checkbox" name="stocked" value={this.state.product.stocked}/>
             In Stock?
           </label>
           <br/>
