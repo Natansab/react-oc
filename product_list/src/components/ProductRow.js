@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import './ProductRow.css';
 
 export default class ProductRow extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // console.log('index: ' + this.props.product.id);
+    this.props.onClick(this.props.product.id);
+  }
+
   render() {
     return (
         <tr>
@@ -14,7 +24,7 @@ export default class ProductRow extends Component {
             {this.props.product.price}
           </td>
           <td>
-            <button>x</button>
+            <button onClick={this.handleClick}>x</button>
           </td>
         </tr>
     )

@@ -22,31 +22,36 @@ class Products extends React.Component {
     };
     this.changeFilterStatus = this.changeFilterStatus.bind(this);
     this.changeSearchText = this.changeSearchText.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
+    this.addProduct = this.addProduct.bind(this);
   }
 
-//   changeFilterStatus() {
-//   //   this.setState((prevState) => {
-//   //     this.state.inStockOnly = prevState.inStockOnly ? false : true;
-//   // });
-//   console.log(this.state);
-//   let newStockStatus = this.state.inStockOnly ? false : true;
-//   this.setState({inStockOnly: newStockStatus});
-//   console.log(this.state.inStockOnly);
-// }
+  changeSearchText(event) {
+    this.setState({filterText: event.target.value});
+  }
 
-changeSearchText(event) {
-  this.setState({filterText: event.target.value});
-}
+  changeFilterStatus() {
+    this.setState((prevState) => {
+      let newStockStatus = prevState.inStockOnly ? false : true;
+      return {
+        inStockOnly: newStockStatus,
+      };
+    });
+  }
 
-changeFilterStatus() {
-  this.setState((prevState) => {
-    let newStockStatus = prevState.inStockOnly ? false : true;
-    return {
-      inStockOnly: newStockStatus,
-    };
-});
-}
+  removeProduct(index) {
+    let updatedProductList = this.state.products;
+    delete updatedProductList[index];
+    this.setState({products: updatedProductList});
+  }
 
+  addProduct(category, price, stocked, name) {
+    let id = Object.keys(this.state.products).length + 1;
+    let newProduct = {id, category, price, stocked, name};
+    let updatedProductList = this.state.products;
+    updatedProductList[id] = newProduct;
+    this.setState({products: updatedProductList});
+  }
 
   render() {
     return (
@@ -55,15 +60,17 @@ changeFilterStatus() {
           inStockOnly={this.state.inStockOnly}
           onClick={this.changeFilterStatus}
           filterText={this.state.filterText}
-          // handleChange={this.handleChange}
           onChange={this.changeSearchText}
         />
         <ProductTable
           products={this.state.products}
           inStockOnly={this.state.inStockOnly}
           search={this.state.filterText}
+          onClick={this.removeProduct}
         />
-        <ProductForm />
+        <ProductForm
+          onSubmit={this.addProduct}
+        />
       </div>
     );
   }

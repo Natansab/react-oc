@@ -2,17 +2,9 @@ import React, { Component } from 'react';
 import SortableColumnHeader from './SortableColumnHeader';
 import ProductRow from './ProductRow';
 
-export default class Filters extends Component {
+export default class ProductTable extends Component {
   render() {
     let productsArray = [];
-
-    // Methode plus claire
-    // let p = this.props.products;
-    // for (var key in p) {
-    //   if (p.hasOwnProperty(key)) {
-    //     products.push(p[key]);
-    //   }
-    // }
 
     // Methode plus condensee
     productsArray = Object.keys(this.props.products).map((pId) => this.props.products[pId]);
@@ -22,7 +14,7 @@ export default class Filters extends Component {
       if (product.name.indexOf(this.props.search) === -1 || (this.props.inStockOnly && !product.stocked))
         return;
       return (
-        rows.push(<ProductRow product={product} key={product.id}/>)
+        rows.push(<ProductRow product={product} key={product.id} onClick={this.props.onClick}/>)
       );
     })
 
