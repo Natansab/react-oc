@@ -25,12 +25,10 @@ export default class ProductTable extends Component {
 
     pArr.sort((a, b) => {
       if (!this.state.sort)
-        return ;
+        return (0);
       if (this.state.sort === 'desc')
-        return(a.name>b.name);
-      else {
-        return(a.name<b.name);
-      }
+        return (a.name>b.name);
+      return (a.name<b.name);
     });
 
     let rows = [];
