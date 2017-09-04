@@ -37,12 +37,11 @@ class Products extends React.Component {
     });
   }
 
-  addProduct(category, price, stocked, name) {
+  addProduct(product) {
     this.setState((prevState) => {
-      let id = Math.max.apply(null, Object.keys(this.state.products)) + 1;
-      let product = {id, category, price, stocked, name};
-      let products = this.state.products;
-      products[id] = product;
+      product.id = Math.max.apply(null, Object.keys(prevState.products)) + 1;
+      let products = prevState.products;
+      products[product.id] = product;
       return { products };
     });
   }

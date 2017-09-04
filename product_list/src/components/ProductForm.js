@@ -18,7 +18,12 @@ export default class ProductForm extends Component {
 
   handleSubmit(event) {
     const p = this.state.product;
-    this.props.onSubmit(p.category, p.price, p.stocked, p.name);
+    this.props.onSubmit({
+      category: p.category,
+      price: p.price,
+      stocked: p.stocked,
+      name: p.name
+    });
     event.preventDefault();
   }
 
