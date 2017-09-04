@@ -1,50 +1,30 @@
 import React, { Component } from 'react';
 
+const RESET_VALUES = {id: '', category: '', price: '', stocked: false, name: ''};
+
 export default class ProductForm extends Component {
   constructor(props) {
     super(props);
-    let newProduct = {
-      category: '',
-      price: '',
-      stocked: false,
-      name:'' };
       this.state = {
-        product: newProduct
+        product: Object.assign({}, RESET_VALUES)
       }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.changeInStockStatus = this.changeInStockStatus.bind(this);
   }
 
-  handleSubmit(event) {
-    const p = this.state.product;
-    this.props.onSubmit({
-      category: p.category,
-      price: p.price,
-      stocked: p.stocked,
-      name: p.name
+  handleChange(e) {
+    let product = this.state.product;
+    let value = e.target[e.target.type === 'checkbox' ? 'checked' : 'value'];
+    product[e.target.name] = value;
+    this.setState({ product: product});
+  }
+
+  handleSubmit(e) {
+    this.props.onSubmit(this.state.product);
+    this.setState({
+    product: Object.assign({}, RESET_VALUES)
     });
-    event.preventDefault();
-  }
-
-  handleChange(event) {
-    if (event.target.name === 'stocked')
-      return ;
-    let updatedProduct = this.state.product;
-    updatedProduct[event.target.name] = event.target.value;
-    this.setState({ product: updatedProduct});
-  }
-
-  changeInStockStatus() {
-    this.setState((prevState) => {
-      let inStockStatus = prevState.product.stocked ? false : true;
-      console.log(inStockStatus);
-      let updatedProduct = this.state.product;
-      updatedProduct.stocked = inStockStatus;
-      return {
-        product: updatedProduct,
-      };
-    });
+    e.preventDefault();
   }
 
 
@@ -69,7 +49,7 @@ export default class ProductForm extends Component {
           </label>
           <br/>
           <label>
-            <input type="checkbox" name="stocked" value="true" onClick={this.changeInStockStatus}/>
+            <input type="checkbox" name="stocked" value="true"/>
             In Stock?
           </label>
           <br/>
