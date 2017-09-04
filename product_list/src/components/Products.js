@@ -20,29 +20,21 @@ class Products extends React.Component {
       filterText: '',
       products: PRODUCTS
     };
-    this.changeFilterStatus = this.changeFilterStatus.bind(this);
-    this.changeSearchText = this.changeSearchText.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     this.addProduct = this.addProduct.bind(this);
   }
 
-  changeSearchText(event) {
-    this.setState({filterText: event.target.value});
-  }
-
-  changeFilterStatus() {
-    this.setState((prevState) => {
-      let newStockStatus = prevState.inStockOnly ? false : true;
-      return {
-        inStockOnly: newStockStatus,
-      };
-    });
+  handleFilter(filterInput) {
+    this.setState(filterInput);
   }
 
   removeProduct(index) {
-    let updatedProductList = this.state.products;
-    delete updatedProductList[index];
-    this.setState({products: updatedProductList});
+    this.setState((prevState) => {
+      let products = prevState.products;
+      delete products[index];
+      return { products };
+    });
   }
 
   addProduct(category, price, stocked, name) {
@@ -59,9 +51,8 @@ class Products extends React.Component {
       <div>
         <Filters
           inStockOnly={this.state.inStockOnly}
-          onClick={this.changeFilterStatus}
           filterText={this.state.filterText}
-          onChange={this.changeSearchText}
+          onChange={this.handleFilter}
         />
         <ProductTable
           products={this.state.products}
