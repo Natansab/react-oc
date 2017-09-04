@@ -4,35 +4,39 @@ import './Filters.css';
 export default class Filters extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {value: ''};
   }
 
-  handleChange(event) {
-    console.log(this.props);
-    this.props.onChange(event);
-  }
-
-  handleClick(props) {
-    this.props.onClick();
+  handleChange(e) {
+    const value = e.target[e.target.type === "checkbox" ? "checked" : "value"];
+    const name = e.target.name;
+    this.props.onChange({
+      [name]: value
+    });
   }
 
   render() {
     return (
       <div>
         <br/>
-        <input type="text" placeholder='Search...' value={this.props.filterText} onChange={this.handleChange}/>
+        <input
+          type="text"
+          placeholder='Search...'
+          name='filterText'
+          value={this.props.filterText}
+          onChange={this.handleChange}/>
         <br/>
         <p>
           <label className='unselectable'>
               <input
-                id='checkBox'
                 type='checkbox'
+                name='inStockOnly'
                 checked={this.props.inStockOnly}
-                onClick={this.handleClick}/>
+                onChange={this.handleChange}
+              />
               Only show products in stock
-          </label><br/>
+          </label>
+          <br/>
         </p>
       </div>
     )
